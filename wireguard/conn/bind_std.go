@@ -17,7 +17,7 @@ import (
 	"syscall"
 
 	"golang.org/x/net/ipv4"
-	"golang.org/x/net/ipv6"
+	
 )
 
 var (
@@ -32,20 +32,19 @@ var (
 type StdNetBind struct {
 	mu            sync.Mutex // protects all fields except as specified
 	ipv4          *net.UDPConn
-	ipv6          *net.UDPConn
+	
 	ipv4PC        *ipv4.PacketConn // will be nil on non-Linux
-	ipv6PC        *ipv6.PacketConn // will be nil on non-Linux
+	 // will be nil on non-Linux
 	ipv4TxOffload bool
 	ipv4RxOffload bool
-	ipv6TxOffload bool
-	ipv6RxOffload bool
+	
 
 	// these two fields are not guarded by mu
 	udpAddrPool sync.Pool
 	msgsPool    sync.Pool
 
 	blackhole4 bool
-	blackhole6 bool
+	
 }
 
 func NewStdNetBind() Bind {
