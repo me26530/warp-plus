@@ -136,7 +136,7 @@ func (s *StdNetBind) Open(uport uint16) ([]ReceiveFunc, uint16, error) {
 	defer s.mu.Unlock()
 
 	var err error
-	var tries int
+	
 
 	if s.ipv4 != nil {
 		return nil, 0, ErrBindAlreadyOpen
@@ -144,7 +144,7 @@ func (s *StdNetBind) Open(uport uint16) ([]ReceiveFunc, uint16, error) {
 
 	// Attempt to open ipv4 listener on the same port.
 	// If uport is 0, we can retry on failure.
-again:
+
 	port := int(uport)
 	var v4conn *net.UDPConn
 	var v4pc *ipv4.PacketConn
