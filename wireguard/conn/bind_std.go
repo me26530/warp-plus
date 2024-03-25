@@ -162,7 +162,7 @@ again:
 	}
 
 	// Listen on the same port as we're using for ipv4.
-	v6conn, port, err = listenNet("udp6", port)
+	v6conn, port, err = listenNet("udp", port)
 	if uport == 0 && errors.Is(err, syscall.EADDRINUSE) && tries < 100 {
 		v4conn.Close()
 		tries++
@@ -349,7 +349,7 @@ func (s *StdNetBind) Send(bufs [][]byte, endpoint Endpoint) error {
 		blackhole = s.blackhole6
 		conn = s.ipv6
 		br = s.ipv6PC
-		is6 = false
+		is6 = true
 		offload = s.ipv6TxOffload
 	}
 	s.mu.Unlock()
