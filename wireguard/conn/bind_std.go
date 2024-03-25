@@ -162,7 +162,7 @@ again:
 	}
 
 	// Listen on the same port as we're using for ipv4.
-	v6conn, port, err = listenNet("udp", port)
+	v6conn, port, err = listenNet("udp4", port)
 	if uport == 0 && errors.Is(err, syscall.EADDRINUSE) && tries < 100 {
 		v4conn.Close()
 		tries++
